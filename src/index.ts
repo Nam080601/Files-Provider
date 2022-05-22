@@ -1,15 +1,15 @@
-import bodyParser from "body-parser";
 import express from "express";
+import path from "path";
 
 const app = express();
-const port = process.env.PORT || 3333;
+const port = process.env.PORT || 5000;
 
-app.use(bodyParser.json());
-app.use(bodyParser.raw({ type: "application/vnd.custom-type" }));
-app.use(bodyParser.text({ type: "text/html" }));
+app.use(express.json());
+app.use(express.text({ type: "text/html" }));
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.get("/", async (req, res) => {
-  res.json({ Hello: "World" });
+  res.send("Welcome to Files Provider !");
 });
 
 app.listen(port, () => {
